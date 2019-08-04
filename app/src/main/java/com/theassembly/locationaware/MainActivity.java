@@ -42,6 +42,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.locationtech.jts.util.Debug.print;
+
 public class MainActivity extends AppCompatActivity {
 
     private Map map = null;
@@ -53,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void makeRequest(GeoCoordinate coords) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,"https://gfe.api.here.com/2/search/proximity.json?layer_ids=4711&app_id=APP_ID_HERE&app_code=APP_CODE_HERE&proximity=" + coords.getLatitude() + "," + coords.getLongitude() + "&key_attribute=NAME", null, new com.android.volley.Response.Listener<JSONObject>() {
+        print("Coordinates: "+coords);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,"https://gfe.api.here.com/2/search/proximity.json?layer_ids=4711&app_id=vAQFJUb8VhYGkMvHDkCI&app_code=nxIsIdzrkyjGH5LIqGyvtg&proximity=" + coords.getLatitude() + "," + coords.getLongitude() + "&key_attribute=NAME", null, new com.android.volley.Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -104,14 +107,6 @@ public class MainActivity extends AppCompatActivity {
                                 oldPosition = currentPosition;
                             }
                         }
-                        /*@Override
-                        public void onPositionUpdated(PositioningManager.LocationMethod method, GeoPosition position, boolean isMapMatched) {
-                            currentPosition = position.getCoordinate();
-                            if(!currentPosition.equals(oldPosition)) {
-                                map.setCenter(position.getCoordinate(), Map.Animation.NONE);
-                                oldPosition = currentPosition;
-                            }
-                        }*/
                         @Override
                         public void onPositionFixChanged(PositioningManager.LocationMethod method, PositioningManager.LocationStatus status) { }
                     };
