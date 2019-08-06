@@ -14,13 +14,6 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
-        <EditText
-            android:id="@+id/query"
-            android:hint="Query..."
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:inputType="text"/>
-
 
         <fragment
             class="com.here.android.mpa.mapping.MapFragment"

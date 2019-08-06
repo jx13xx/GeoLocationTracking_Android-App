@@ -72,19 +72,29 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("tag", "OnResponseCalled");
                     JSONArray geometries = response.getJSONArray("geometries");
                     if(geometries.length() >0 ){
-                    if(geometries.getJSONObject(0).getJSONObject("attributes").getString("NAME").equals("PIZZA_HUT")){
-                        Log.d("tag", "IN5");
-                       String code1 = "A" ;
+                    if(geometries.getJSONObject(0).getJSONObject("attributes").getString("NAME").equals("KV")){
+                        Log.d("tag", "Welcome to Knowledge Village");
+                        String code1 = "A" ;
                         Notification(code1);
 
-                      //  Notification();
-                    }
-
-                       else {
+                    } else if (geometries.getJSONObject(0).getJSONObject("attributes").getString("NAME").equals("DD")){
+                        Log.d("HERE", "Welcome To Dubai Downtown.");
                         String code1 = "B" ;
                         Notification(code1);
-                        Log.d("HERE", "Don't eat at Dominos, eat at Pizza Hut.");
                      }
+
+                      else if (geometries.getJSONObject(0).getJSONObject("attributes").getString("NAME").equals("DDD")){
+                        Log.d("HERE", "Welcome To Dubai Design District.");
+                        String code1 = "C" ;
+                        Notification(code1);
+                     }
+
+
+                    }
+                    else{
+                         String code1 = "Unknown" ;
+                          Notification(code1);
+                        Log.d("tag", "Outside Area");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -141,28 +151,52 @@ public class MainActivity extends AppCompatActivity {
                     }
                     map.getPositionIndicator().setVisible(true);
 
-                    List<GeoCoordinate> pizzahutShape = new ArrayList<GeoCoordinate>();
+                    // >>>>>>>In-5 Knowledge Village  - Start
+                    // Area : A
+                    List<GeoCoordinate> in5_kv = new ArrayList<GeoCoordinate>();
 
-                    pizzahutShape.add(new GeoCoordinate(25.107785, 55.165478, 0.0));
-                    pizzahutShape.add(new GeoCoordinate(25.108073, 55.165254, 0.0));
-                    pizzahutShape.add(new GeoCoordinate(25.107751, 55.164961, 0.0));
-                    pizzahutShape.add(new GeoCoordinate(25.107561, 55.165163, 0.0));
+                    in5_kv.add(new GeoCoordinate(25.107785, 55.165478, 0.0));
+                    in5_kv.add(new GeoCoordinate(25.108073, 55.165254, 0.0));
+                    in5_kv.add(new GeoCoordinate(25.107751, 55.164961, 0.0));
+                    in5_kv.add(new GeoCoordinate(25.107561, 55.165163, 0.0));
 
-
-                    List<GeoCoordinate> dominosShape = new ArrayList<GeoCoordinate>();
-                    dominosShape.add(new GeoCoordinate(37.739442604238896, -121.43717674042182, 0.0));
-                    dominosShape.add(new GeoCoordinate(37.739442604238896, -121.43687095484256, 0.0));
-                    dominosShape.add(new GeoCoordinate(37.73916470683655, -121.43688173999453, 0.0));
-                    dominosShape.add(new GeoCoordinate(37.739149792814075, -121.43720352649598, 0.0));
-
-                    GeoPolygon polygon = new GeoPolygon(pizzahutShape);
+                    GeoPolygon polygon = new GeoPolygon(in5_kv);
                     MapPolygon mapPolygon = new MapPolygon(polygon);
                     mapPolygon.setFillColor(Color.argb(70, 0, 255, 0));
-                    GeoPolygon geoDominosPolygon = new GeoPolygon(dominosShape);
-                    MapPolygon mapDominosPolygon = new MapPolygon(geoDominosPolygon);
-                    mapDominosPolygon.setFillColor(Color.argb(70, 0, 0, 255));
                     map.addMapObject(mapPolygon);
-                    map.addMapObject(mapDominosPolygon);
+
+                    // In -5 KnowledgeVillage - End
+
+                    //>>>>>>>>>> Downtown Dubai
+                    // Area : B
+                    List<GeoCoordinate> downtown_d = new ArrayList<GeoCoordinate>();
+                    downtown_d.add(new GeoCoordinate(25.194012, 55.267126, 0.0));
+                    downtown_d.add(new GeoCoordinate(25.202846, 55.272255, 0.0));
+                    downtown_d.add(new GeoCoordinate(25.194044, 55.289192, 0.0));
+                    downtown_d.add(new GeoCoordinate(25.185237, 55.277694, 0.0));
+
+                    GeoPolygon geoDowntownPolygon = new GeoPolygon(downtown_d);
+                    MapPolygon mapDowtownPolygon = new MapPolygon(geoDowntownPolygon);
+                    mapDowtownPolygon.setFillColor(Color.argb(70, 255, 0, 0));
+                    map.addMapObject(mapDowtownPolygon);
+                    // Downtown Dubai - End
+
+                    // >>>>>>>>Dubai Design District - sTART
+                    // Area : C
+                    List<GeoCoordinate> design_district = new ArrayList<GeoCoordinate>();
+                    design_district.add(new GeoCoordinate(25.184272, 55.295134, 0.0));
+                    design_district.add(new GeoCoordinate(25.199339, 55.294489, 0.0));
+                    design_district.add(new GeoCoordinate(25.200621, 55.308610, 0.0));
+                    design_district.add(new GeoCoordinate(25.182189, 55.309840, 0.0));
+
+                    GeoPolygon polygon_design_district = new GeoPolygon(design_district);
+                    MapPolygon mapPolygon_design = new MapPolygon(polygon_design_district);
+                    mapPolygon_design.setFillColor(Color.argb(70, 0, 0, 255));
+                    map.addMapObject(mapPolygon_design);
+                    // Dubai Design District - eND
+
+
+
                 }
             }
         });
@@ -177,12 +211,14 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"Welcome To IN- 5", Toast.LENGTH_LONG).show();
         }
         else if(locationcode == "B"){
-            Toast.makeText(this,"Welcome To Random", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Welcome To Dubai Downtown Dubai", Toast.LENGTH_LONG).show();
         }
-        else    {
-            Toast.makeText(this,"Location Not Known ", Toast.LENGTH_LONG).show();
+        else if(locationcode == "C"){
+            Toast.makeText(this,"Welcome To Dubai Design District", Toast.LENGTH_LONG).show();
         }
-
+        else if (locationcode == "Unknown"){
+            Toast.makeText(this,"Unspecified Location Area", Toast.LENGTH_LONG).show();
+        }
 
     }
 }
