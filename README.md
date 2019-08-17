@@ -462,7 +462,7 @@ Update the changes in the <b> makeRequest </b> function
         final String code;
         Log.d("Debug", "MakeRequest");
         print("Coordinates: "+coords);
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,"https://gfe.api.here.com/2/search/proximity.json?layer_ids=4711&app_id={APP_ID}&app_code={APP_CODE}&proximity=" + coords.getLatitude() + "," + coords.getLongitude() + "&key_attribute=NAME", null, new com.android.volley.Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,"https://gfe.api.here.com/2/search/proximity.json?layer_ids=4711&app_id=14tVYqHaHTOGwQTUno2z&app_code=xTSD3c7c3rkh1MjUNMnZtg&proximity=" + coords.getLatitude() + "," + coords.getLongitude() + "&key_attribute=NAME", null, new com.android.volley.Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
